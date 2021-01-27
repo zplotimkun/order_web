@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<head>
+</head>
+<body style="margin:3%">
+<div id="YMK-module"></div>
+<script>
+  (function (d,k) {
+    var s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = 'https://d1skzuhr1cfnuf.cloudfront.net/v1.28-dev/sdk.js?apiKey=' + k;
+    var x = d.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  })(document, 'lULY3ilglUPJgBByp40Uxw');
+</script>
+<div id="YMK-module"></div>
+
+    width: <input id="width" type="text" name="width" value="360"/>
+    height: <input id="height" type="text" name="height" value="480"/>
+  <a href="javascript:;" onClick="changeWH()">ChangeWH</a> |
+<script>
+window.ymkAsyncInit = function() {
+  window.YMK.init({
+       autoOpen:false
+    });
+  window.YMK.addEventListener('videoLoaded', function () {
+    console.log('videoLoaded12');
+    });
+  window.YMK.addEventListener('photoLoaded', function () {
+    console.log('123');
+    });
+  window.YMK.addEventListener('shadeFinderComplete', function (r) {
+    console.log('shadeFinderComplete', r);
+  })
+}
+  function snapshot2blob(){
+    window.YMK.snapshot('blob', function(result) {
+      console.log('results', result);
+    })
+  }
+  function snapshot2base64(){
+    window.YMK.snapshot('base64', function(result) {
+      console.log('results', result);
+    })
+  }
+
+  function loadImage() {
+    var file = document.getElementById('imageData').files[0];
+    if (file) {
+      window.YMK.open(file);
+    }    
+  }
+  
+  function applyMakeupManual() {
+    const itemGuid = document.getElementById('itemGuid');
+    YMK.applyMakeupBySku(itemGuid.value);
+  }
+
+  function applyLookManual() {
+    const lookGuid = document.getElementById('lookGuid');
+    YMK.applyMakeupByLook(lookGuid.value);
+  }
+    function changeWH() {
+    var w = document.getElementById('width').value;
+    var h = document.getElementById('height').value;
+    YMK.init({
+      disableLiveMode: false,
+      forceServerMode: false,
+      showCloseBtnOnLauncher: true,
+      width: parseInt(w),
+      height: parseInt(h)
+    });
+  }
+
+
+</script>
+<div>
+  <a href="javascript:;" onClick="YMK.open()">OPEN</a> | |
+  <a href="javascript:;" onClick="YMK.openSkincare('live')">OPEN (skincare detection - live)</a> |
+  <a href="javascript:;" onClick="YMK.openSkincare('capture')">OPEN (skincare detection - capture)</a>
+  <a href="javascript:;" onClick="YMK.close()">CLOSE</a><br/> |
+  <a href="javascript:;" onClick="YMK.enableCompare()">enableCompare</a> |
+  <a href="javascript:;" onClick="YMK.disableCompare()">disableCompare</a><br/>
+  <a href="javascript:;" onClick="snapshot2blob()">snapshot2blob</a> |
+  <a href="javascript:;" onClick="snapshot2base64()">snapshot2base64</a><br/>
+  <a href="javascript:;" onClick="YMK.reset()">RESET</a><br/>
+
+</div>
+<div id="input_sku">
+                <div>
+                    SKU:<br/>
+                    <input type="text" id="itemGuid" placeholder="ITEM GUID"/>
+                    <button type="button" onClick="applyMakeupManual()">Update</button>
+                    <br/>
+                </div>
+                <div>
+                    LOOK:<br/>
+                    <input type="text" id="lookGuid" placeholder="LOOK GUID"/>
+                    <button type="button" onClick="applyLookManual()">Update</button>
+                    <br/>
+                </div>
+            </div>
+</body>
+</html>
